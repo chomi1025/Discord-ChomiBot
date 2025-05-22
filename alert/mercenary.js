@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 
 // 기준 이벤트 날짜
-const eventStartDate = new Date("2025-05-28T21:00:00+09:00"); // KST 9시
+const eventStartDate = new Date("2025-05-28T00:00:00Z"); // UTC 기준
 
 const eventIntervalDays = 28; // 4주 간격
 
@@ -15,7 +15,7 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   // 5분전 알림
-  cron.schedule("55 20 * * *", () => {
+  cron.schedule("55 11 * * *", () => {
     const today = new Date();
 
     if (isEventDay(today)) {

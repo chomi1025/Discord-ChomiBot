@@ -1,5 +1,5 @@
 const cron = require("node-cron");
-const eventStartDate = new Date("2025-05-21"); // 첫 이벤트 날짜
+const eventStartDate = new Date("2025-05-21T00:00:00Z"); // UTC 기준
 const eventIntervalDays = 2; // 격일
 
 function isEventDay(today) {
@@ -12,8 +12,10 @@ function isEventDay(today) {
 function start(client, channelId) {
   if (!channelId) return;
 
-  cron.schedule("55 20 * * *", () => {
-    const today = new Date();
+  cron.schedule("55 11 * * *", () => {
+    const today = new Date(
+      new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" })
+    );
     if (isEventDay(today)) {
       const channel = client.channels.cache.get(channelId);
       if (channel) {

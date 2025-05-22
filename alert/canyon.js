@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 
 // 기준 이벤트 날짜
-const eventStartDate = new Date("2025-05-17T21:00:00+09:00"); // KST 9시
+const eventStartDate = new Date("2025-05-17T00:00:00Z"); // UTC 기준
 const eventIntervalDays = 28; // 4주 간격
 
 function isEventDay(today) {
@@ -14,7 +14,7 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   // 1군단(9시)
-  cron.schedule("55 20 * * *", () => {
+  cron.schedule("55 11 * * *", () => {
     const today = new Date();
 
     if (isEventDay(today)) {
@@ -29,7 +29,7 @@ function start(client, channelId) {
   });
 
   // 2군단(11시)
-  cron.schedule("55 22 * * *", () => {
+  cron.schedule("55 13 * * *", () => {
     const today = new Date();
 
     if (isEventDay(today)) {
