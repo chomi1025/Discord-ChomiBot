@@ -1,4 +1,5 @@
 {
+  "start": "node bot.js",
   "description": "",
   "dependencies": {
     "discord.js": "^14.19.3",
