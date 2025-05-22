@@ -1,9 +1,9 @@
 const cron = require("node-cron");
 
 // 기준 이벤트 날짜
-const eventStartDate = new Date("2025-05-28T00:00:00Z"); // UTC 기준
+const eventStartDate = new Date("2025-04-30T00:00:00Z"); // UTC 기준
 
-const eventIntervalDays = 28; // 4주 간격
+const eventIntervalDays = 28; // 28고정
 
 function isEventDay(today) {
   const diffTime = today.getTime() - eventStartDate.getTime();
@@ -15,16 +15,23 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   // 5분전 알림
+  // 55 11 고정
   cron.schedule("55 11 * * *", () => {
     const today = new Date();
 
     if (isEventDay(today)) {
       const channel = client.channels.cache.get(channelId);
       if (channel) {
-        channel.send(
-          "```✅ 5분후 용병명예가 시작됩니다! 보상 먹으러 갑시다!😉 \n" +
-            "✅  Mercenary starts in 5 minutes! Let's go claim your rewards!😉```"
-        );
+        const embed = {
+          color: 0x81d742, // 라이트 핑크
+          title: "🔧 용병명예(mercenary)",
+          description:
+            "잠시후 용병명예가 시작됩니다! 보상 먹으러 갑시다!😉\n" +
+            "Mercenary starts will start soon! Let's go claim your rewards!😉",
+          timestamp: new Date(),
+        };
+
+        channel.send({ embeds: [embed] });
       }
     }
   });
