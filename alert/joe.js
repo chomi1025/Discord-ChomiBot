@@ -34,8 +34,8 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   // UTC 기준 02:55 알림 (한국 시간 11:55가 UTC+9니까)
-  // 11 55
-  cron.schedule("11 55 * * *", () => {
+  // 55 11
+  cron.schedule("55 11 * * *", () => {
     const nowUTC = new Date();
 
     if (isEventDay(nowUTC)) {
