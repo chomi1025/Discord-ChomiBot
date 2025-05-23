@@ -15,7 +15,15 @@ const eventScheduler = require("./eventScheduler"); // 이벤트 스케줄러 �
 
 client.once("ready", () => {
   console.log("봇 켜짐!");
-  eventScheduler.start(client); // 봇 켜질 때 이벤트 스케줄러 시작
+  // 🔥 저장된 채널 ID 가져와서 스케줄 시작
+  try {
+    const { channelId } = require("./channel");
+    eventScheduler.start(client, channelId);
+    console.log("자동 알림 스케줄 등록 완료!");
+  } catch (error) {
+    console.log("채널 정보가 아직 없습니다. !등록 먼저 해주세요!");
+  }
+
   console.log("성공적으로 불러옴 !");
 });
 
