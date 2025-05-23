@@ -6,7 +6,12 @@ const mercenary = require("./alert/mercenary"); //솔라
 const foundry = require("./alert/foundry"); //솔라
 const joe = require("./alert/joe"); //솔라
 
+let isRunning = false;
+
 function start(client, channelId) {
+  if (isRunning) return;
+  isRunning = true;
+
   bear.start(client, channelId);
   svs.start(client, channelId);
   solar.start(client, channelId);
