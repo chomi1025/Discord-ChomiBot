@@ -38,7 +38,7 @@ function start(client, channelId) {
 
   // 9시에 전투 알림
   // 55 11 고정
-  cron.schedule("* * * * *", () => {
+  cron.schedule("55 11 * * *", () => {
     const today = new Date();
 
     if (isEventDay(today)) {
