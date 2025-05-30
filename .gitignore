@@ -5,3 +5,5 @@ node_modules/
 .env
 
 channel.js
+
+.github/workflows/
