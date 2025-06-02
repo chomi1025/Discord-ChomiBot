@@ -3,7 +3,7 @@ const cron = require("node-cron");
 // 기준 이벤트 날짜
 const eventStartDate = new Date("2025-06-02T00:00:00Z"); // UTC 기준
 
-const eventIntervalDays = 28; // 28고정
+const eventIntervalDays = 21; // 28고정
 
 function isEventDay(today) {
   const diffTime = today.getTime() - eventStartDate.getTime();
