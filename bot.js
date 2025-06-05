@@ -121,7 +121,8 @@ client.on("messageCreate", async (message) => {
   // ✅ 리스트 조회
   if (
     message.content.toLowerCase().startsWith("!리스트") ||
-    message.content.toLowerCase().startsWith("!list")
+    message.content.toLowerCase().startsWith("!list") ||
+    message.content.toLowerCase().startsWith("!List")
   ) {
     // args를 소문자로 변환
     const isKoreanMode = message.content.startsWith("!리스트");
@@ -133,7 +134,11 @@ client.on("messageCreate", async (message) => {
   }
 
   // ✅ 고양이 사진 가져오기
-  if (message.content === "!냥냥") {
+  if (
+    message.content === "!냥냥" ||
+    message.content === "!야옹" ||
+    message.content === "!Meow"
+  ) {
     try {
       const response = await fetch(
         "https://api.thecatapi.com/v1/images/search"
@@ -173,7 +178,11 @@ client.on("messageCreate", async (message) => {
   }
 
   // ✅ 노새 사진 가져오기
-  if (message.content === "!노새") {
+  if (
+    message.content === "!노새" ||
+    message.content === "!Mule" ||
+    message.content === "!mule"
+  ) {
     const muleImage = await fetchMuleImage();
 
     if (muleImage) {
