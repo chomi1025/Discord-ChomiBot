@@ -16,49 +16,61 @@ function isEventDay(today) {
 function start(client, channelId) {
   // 1군단(9시)
   // 55 11 고정
-  cron.schedule("55 11 * * *", () => {
-    const today = new Date();
+  cron.schedule(
+    "55 11 * * *",
+    () => {
+      const today = new Date();
 
-    if (isEventDay(today)) {
-      const channel = client.channels.cache.get(channelId);
-      if (channel) {
+      if (isEventDay(today)) {
+        const channel = client.channels.cache.get(channelId);
+        if (channel) {
+          if (channel) {
+            const embed = {
+              color: 0x9f6bfe,
+              title: "🔥 무기공장 1군단(Foundry Legion1)",
+              description:
+                "무기공장 1군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요 😉\n" +
+                "The Legion1 of the Foundry starts in 5 minutes! Please join and get ready for the fight 😉",
+              timestamp: new Date(),
+            };
+
+            channel.send({ embeds: [embed] });
+          }
+        }
+      }
+    },
+    {
+      timezone: "UTC", // 🔥 핵심!!!!
+    }
+  );
+
+  // 2군단(11시)
+  //55 13 고정
+  cron.schedule(
+    "55 13 * * *",
+    () => {
+      const today = new Date();
+
+      if (isEventDay(today)) {
+        const channel = client.channels.cache.get(channelId);
         if (channel) {
           const embed = {
             color: 0x9f6bfe,
-            title: "🔥 무기공장 1군단(Foundry Legion1)",
+            title: "🔥 무기공장 2군단(Foundry Legion2)",
             description:
-              "무기공장 1군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요 😉\n" +
-              "The Legion1 of the Foundry starts in 5 minutes! Please join and get ready for the fight 😉",
+              "무기공장 2군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요 😉\n" +
+              "The Legion2 of the Foundry starts in 5 minutes! Please join and get ready for the fight 😉",
             timestamp: new Date(),
           };
 
           channel.send({ embeds: [embed] });
         }
       }
+    },
+    {
+      timezone: "UTC", // 🔥 핵심!!!!
     }
-  });
-
-  // 2군단(11시)
-  //55 13 고정
-  cron.schedule("55 13 * * *", () => {
-    const today = new Date();
-
-    if (isEventDay(today)) {
-      const channel = client.channels.cache.get(channelId);
-      if (channel) {
-        const embed = {
-          color: 0x9f6bfe,
-          title: "🔥 무기공장 2군단(Foundry Legion2)",
-          description:
-            "무기공장 2군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요 😉\n" +
-            "The Legion2 of the Foundry starts in 5 minutes! Please join and get ready for the fight 😉",
-          timestamp: new Date(),
-        };
-
-        channel.send({ embeds: [embed] });
-      }
-    }
-  });
+  );
 }
 
 module.exports = { start };

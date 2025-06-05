@@ -6,4 +6,8 @@ node_modules/
 
 channel.js
 
+echo "pelagic-cocoa-460602-p1-d856db194434.json" >> .gitignore
+
 .github/workflows/
+
+absent/
