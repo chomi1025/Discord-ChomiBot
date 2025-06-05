@@ -1,9 +1,19 @@
 # Node modules
+# Node modules
 node_modules/
 
 # 환경 변수 파일
 .env
 
+# 서비스 계정 키 (민감 정보)
+pelagic-cocoa-460602-p1-d856db194434.json
+
+# 채널 정보 (커밋 필요 없음)
 channel.js
 
-.github/workflows/pelagic-cocoa-460602-p1-d856db194434.json
+# GitHub Actions (원하면 제외 가능)
+.github/workflows/
+
+# Google Sheets 관련 (원하면 제외 가능)
+absent/
+pelagic-cocoa-460602-p1-d856db194434.json

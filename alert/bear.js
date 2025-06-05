@@ -13,26 +13,31 @@ function start(client, channelId) {
   if (!channelId) return;
 
   //55 11로 바꾸시오
-  cron.schedule("55 11 * * *", () => {
-    const today = new Date(
-      new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" })
-    );
-    if (isEventDay(today)) {
-      const channel = client.channels.cache.get(channelId);
+  cron.schedule(
+    "55 11 * * *",
+    () => {
+      const today = new Date(); // UTC 기준 그대로!
 
-      if (channel) {
-        const embed = {
-          color: 0xf5f93e, // 주황색 바
-          title: "🐻 곰 사냥(Bear)",
-          description:
-            "곰 사냥 5분 전입니다. 사냥을 준비해주세요! 😉\nBear hunting starts in 5 minutes. Get ready! 😉",
-          timestamp: new Date(),
-        };
+      if (isEventDay(today)) {
+        const channel = client.channels.cache.get(channelId);
 
-        channel.send({ embeds: [embed] });
+        if (channel) {
+          const embed = {
+            color: 0xf5f93e, // 주황색 바
+            title: "🐻 곰 사냥(Bear)",
+            description:
+              "곰 사냥 5분 전입니다. 사냥을 준비해주세요! 😉\nBear hunting starts in 5 minutes. Get ready! 😉",
+            timestamp: new Date(),
+          };
+
+          channel.send({ embeds: [embed] });
+        }
       }
+    },
+    {
+      timezone: "UTC", // 🔥 핵심!!!!
     }
-  });
+  );
 }
 
 module.exports = { start };

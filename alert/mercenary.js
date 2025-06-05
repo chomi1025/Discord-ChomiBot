@@ -34,22 +34,34 @@ function sendAlert(client, channelId) {
 
 function start(client, channelId) {
   // 12:30 알림 (짝수번째)
-  cron.schedule("30 12 * * *", () => {
-    const now = new Date();
-    const eventIndex = getEventIndex(now);
-    if (eventIndex >= 0 && eventIndex % 2 === 0) {
-      sendAlert(client, channelId);
+  cron.schedule(
+    "30 12 * * *",
+    () => {
+      const now = new Date();
+      const eventIndex = getEventIndex(now);
+      if (eventIndex >= 0 && eventIndex % 2 === 0) {
+        sendAlert(client, channelId);
+      }
+    },
+    {
+      timezone: "UTC", // 🔥 핵심!!!!
     }
-  });
+  );
 
   // 12:00 알림 (홀수번째)
-  cron.schedule("0 12 * * *", () => {
-    const now = new Date();
-    const eventIndex = getEventIndex(now);
-    if (eventIndex >= 0 && eventIndex % 2 === 1) {
-      sendAlert(client, channelId);
+  cron.schedule(
+    "0 12 * * *",
+    () => {
+      const now = new Date();
+      const eventIndex = getEventIndex(now);
+      if (eventIndex >= 0 && eventIndex % 2 === 1) {
+        sendAlert(client, channelId);
+      }
+    },
+    {
+      timezone: "UTC", // 🔥 핵심!!!!
     }
-  });
+  );
 }
 
 module.exports = { start };
