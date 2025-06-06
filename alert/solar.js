@@ -17,7 +17,7 @@ function start(client, channelId) {
   // 8시에 이동알림
   //55 10 고정
   cron.schedule(
-    "55 10 * * *",
+    "00 11 * * *",
     () => {
       const today = new Date();
 
