@@ -22,9 +22,8 @@
 　
 ## 🖼️ 데모 & 스크린샷
 
-> (여기 이미지 넣기)  
-예시:
-![screenshot](./images/demo.png)
+![image](https://github.com/user-attachments/assets/55e2e4d0-7e47-4afc-b736-9c177c871aca)
+
 
 　
 ## 🚀 설치 및 실행 방법
