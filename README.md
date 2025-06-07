@@ -23,6 +23,7 @@
 ## 🖼️ 데모 & 스크린샷
 
 ![image](https://github.com/user-attachments/assets/55e2e4d0-7e47-4afc-b736-9c177c871aca)
+![image](https://github.com/user-attachments/assets/cf093313-150c-4785-a6d8-a0920e7a5a81)
 
 
 　
