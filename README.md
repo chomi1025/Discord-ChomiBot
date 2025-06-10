@@ -73,24 +73,25 @@
 #### 2-1 불참자 조회
 <table align="center" style="margin: auto; width: 100%;">
   <tr>
-    <td align="center" style="padding: 10px; vertical-align: top;">
+      <td align="center" style="padding: 10px; vertical-align: top;">
       <div>
-        <img src="https://github.com/user-attachments/assets/2bf85c43-145c-4f7f-bdb8-a69f5fe09e1f" width="450" />
+        <img src="https://github.com/user-attachments/assets/6e9494d1-f633-4fbc-9520-ddf011074137" width="450" />
       </div>
     </td>
-    <td align="center" style="padding: 10px;">
+      <td align="center" style="padding: 10px;">
       <div>
-        <img src="https://github.com/user-attachments/assets/bf059b73-faf2-49c7-9259-899f636ee15c" width="450" />
+        <img src="https://github.com/user-attachments/assets/14d89eb6-b0e7-4c85-8f57-b901dd002825" width="450" />
       </div>
     </td>
+  
   </tr>
   
  <tr>
     <td align="center" style="padding-top: 10px;">
-      <em>🔎 디스코드에서 불참자를 조회합니다.</em>
+      <em>🔎 구글시트에서는 탭마다 이벤트명을 적어 구분해놓습니다.</em>
     </td>
    <td align="center" style="padding-top: 10px;">
-      <em>📖 구글시트에 있던 데이터값을 불러옵니다.</em>
+      <em>📖 명령어 이벤트를 입력시 시트에서 가장 최근 데이터값을 불러옵니다.</em>
     </td>
   </tr>
   
@@ -105,7 +106,20 @@
 
 　
 ### 🐶 3. 동물사진 출력기능
-![GIF 2025-06-10 오후 4-14-19](https://github.com/user-attachments/assets/273153b8-0b40-4e49-b2e9-901ab36ed407)
+<table align="center" style="margin: auto; width: 100%;">
+  <tr>
+      <td align="center" style="padding: 10px; vertical-align: top;">
+      <div>
+        <img src="https://github.com/user-attachments/assets/273153b8-0b40-4e49-b2e9-901ab36ed407" width="450" />
+      </div>
+  </tr>
+  
+ <tr>
+    <td align="center" style="padding-top: 10px;">
+      <em>😺 힐링 동물을 멤버들과 공유하며 소소한 행복을 나눌 수 있습니다 💖</em>
+    </td>
+  </tr>
+</table>
 
 
 [!자세한 설명 보기](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%82%AC%EC%A7%84-%EC%B6%9C%EB%A0%A5)
