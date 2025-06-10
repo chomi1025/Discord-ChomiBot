@@ -1,12 +1,24 @@
 #  👾 Discord-ChomiBot
-![Build Status](https://img.shields.io/github/actions/workflow/status/사용자명/저장소명/ci.yml?branch=main)
-![Node Version](https://img.shields.io/node/v/패키지명)
-![License](https://img.shields.io/github/license/사용자명/저장소명)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6%2B-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=flat-square&logo=node.js&logoColor=white)
+![Discord.js](https://img.shields.io/badge/Discord.js-14.19.3-blue?style=flat-square&logo=discord&logoColor=white)
+![Google APIs](https://img.shields.io/badge/googleapis-149.0.0-green?style=flat-square&logo=google&logoColor=white)
+![Node Cron](https://img.shields.io/badge/node--cron-4.0.6-orange?style=flat-square&logo=nodemon&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-1.9.0-lightgrey?style=flat-square&logo=axios&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/Google%20Cloud%20Platform-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+![PM2](https://img.shields.io/badge/PM2-blue?style=flat-square&logo=pm2&logoColor=white)
+![Dotenv](https://img.shields.io/badge/Dotenv-16.5.0-red?style=flat-square&logo=dotenv&logoColor=white)
+![Node Fetch](https://img.shields.io/badge/node--fetch-2.7.0-purple?style=flat-square&logo=nodemon&logoColor=white)
+![Node Schedule](https://img.shields.io/badge/node--schedule-2.1.1-yellowgreen?style=flat-square&logo=nodemon&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
+
 
 이 디스코드 봇은, 제가 실제로 플레이하고 있는 **모바일 MMORPG 게임**의 길드 친구들을 위해 제작한 프로젝트입니다 !
 
 미국, 대만, 중국, 러시아 등 다양한 지역에 거주하는 외국인 친구들과 함께 플레이하다 보니 
- **이벤트 시간을 자주 잊는 일이 생겼고**, 자연스럽게 **참여율이 낮아지는 문제**로 이어졌습니다.
+ **이벤트 시간을 자주 잊는 일이 생겼고**,  자연스럽게 **참여율이 낮아지는 문제**로 이어졌습니다.
 
 그래서 "디스코드에서 봇이 자동으로 알림을 보내주면 어떨까?" 하는 생각이 들었고,  
 길드 유저들의 **이벤트 참여율을 높이고 소통을 돕기 위해** 이 봇을 만들게 되었습니다. 💡
