@@ -1,13 +1,11 @@
 require("dotenv").config();
-const fetch = require("node-fetch");
 const { fetchMuleImage } = require("./fetchImage/mule.js");
+const { fetchDogImage } = require("./fetchImage/dog.js");
+const { fetchCatImage } = require("./fetchImage/cat.js");
 
 const fs = require("fs");
 const { Client, GatewayIntentBits } = require("discord.js");
-const {
-  handleAbsentCommand,
-  handleListCommand,
-} = require("./absent/googleSheets");
+const { handleAbsentCommand, handleListCommand } = require("./absent");
 const eventScheduler = require("./eventScheduler"); // 이벤트 스케줄러 모듈 불러오기
 
 // ✅ 전역 변수
@@ -140,14 +138,11 @@ client.on("messageCreate", async (message) => {
     message.content === "!Meow"
   ) {
     try {
-      const response = await fetch(
-        "https://api.thecatapi.com/v1/images/search"
-      );
-      const data = await response.json();
+      const catImage = await fetchCatImage();
 
-      if (data[0] && data[0].url) {
+      if (catImage) {
         message.channel.send({
-          files: [data[0].url],
+          files: [catImage],
         });
       } else {
         message.channel.send("😿 고양이 사진을 가져올 수 없어요!");
@@ -161,19 +156,18 @@ client.on("messageCreate", async (message) => {
   // ✅ 강아지 사진 가져오기
   if (message.content === "!멍멍") {
     try {
-      const response = await fetch("https://dog.ceo/api/breeds/image/random");
-      const data = await response.json();
+      const dogImage = await fetchDogImage();
 
-      if (data.status === "success" && data.message) {
+      if (dogImage) {
         message.channel.send({
-          files: [data.message],
+          files: [dogImage],
         });
       } else {
         message.channel.send("🐕‍🦺 댕댕이 사진을 못 찾았어요ㅠㅠ");
       }
     } catch (error) {
       console.error("🐛 강아지 API 오류:", error);
-      message.channel.send("❌ 오류가 발생했어요! 밍키가 댕댕이 데려올게요!");
+      message.channel.send("❌ 오류가 발생했어요!");
     }
   }
 
@@ -190,7 +184,7 @@ client.on("messageCreate", async (message) => {
         files: [muleImage],
       });
     } else {
-      message.channel.send("노새 이미지를 못 찾았어...ㅠㅠ");
+      message.channel.send("❌ 오류가 발생했어요!");
     }
   }
 });

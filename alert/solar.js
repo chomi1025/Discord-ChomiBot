@@ -39,7 +39,7 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
+      timezone: "UTC",
     }
   );
 
@@ -67,7 +67,7 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
+      timezone: "UTC",
     }
   );
 }
