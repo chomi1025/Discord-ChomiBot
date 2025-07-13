@@ -34,7 +34,7 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   cron.schedule(
-    "31 21 * * *",
+    "55 11 * * *",
     () => {
       const nowUTC = new Date();
       console.log("⏰ CRON 작동함 (UTC):", nowUTC.toISOString());

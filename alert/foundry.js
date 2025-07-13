@@ -14,10 +14,10 @@ function isEventDay(today) {
 }
 
 function start(client, channelId) {
-  // 1군단(9시)
+  // 1군단(11시)
   // 55 11 고정
   cron.schedule(
-    "55 11 * * *",
+    "55 13 * * *",
     () => {
       const today = new Date();
 
@@ -44,10 +44,10 @@ function start(client, channelId) {
     }
   );
 
-  // 2군단(11시)
-  //55 13 고정
+  // 2군단(9시)
+  //55 11 고정
   cron.schedule(
-    "55 13 * * *",
+    "55 11 * * *",
     () => {
       const today = new Date();
 
