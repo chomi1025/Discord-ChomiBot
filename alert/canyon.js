@@ -14,9 +14,9 @@ function isEventDay(today) {
 
 function start(client, channelId) {
   // 1군단(9시)
-  //55 11 고정
+  //55 13 고정
   cron.schedule(
-    "55 11 * * *",
+    "55 13 * * *",
     () => {
       const today = new Date();
 

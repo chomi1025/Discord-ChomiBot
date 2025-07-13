@@ -4,7 +4,7 @@ const cron = require("node-cron");
 const killEventStartDate = new Date("2025-06-06T00:00:00Z");
 
 // 14일 간격 반복
-const killEventIntervalDays = 14;
+const killEventIntervalDays = 28;
 
 function isKillEventDay(today) {
   const diffTime = today.getTime() - killEventStartDate.getTime();
