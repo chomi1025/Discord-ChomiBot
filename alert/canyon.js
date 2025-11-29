@@ -1,26 +1,15 @@
 const cron = require("node-cron");
-
-// 기준 이벤트 날짜
-const eventStartDate = new Date("2025-05-17T00:00:00Z"); // UTC 기준
-const eventIntervalDays = 28; // 28고정
-
-function isEventDay(today) {
-  const diffTime = today.getTime() - eventStartDate.getTime();
-  if (diffTime < 0) return false; // 이벤트 시작 전
-
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays % eventIntervalDays === 0;
-}
+const { isCanyonEventDay } = require("./eventUtils");
 
 function start(client, channelId) {
-  // 1군단(9시)
+  // 1군단(11시)
   //55 13 고정
   cron.schedule(
     "55 13 * * *",
     () => {
       const today = new Date();
 
-      if (isEventDay(today)) {
+      if (isCanyonEventDay(today)) {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
           const embed = {
@@ -42,14 +31,14 @@ function start(client, channelId) {
     }
   );
 
-  // 2군단(11시)
-  // 55 13 고정
+  // 2군단(9시)
+  // 55 11 고정
   cron.schedule(
-    "55 13 * * *",
+    "55 11 * * *",
     () => {
       const today = new Date();
 
-      if (isEventDay(today)) {
+      if (isCanyonEventDay(today)) {
         const channel = client.channels.cache.get(channelId);
         if (channel) {
           const embed = {
