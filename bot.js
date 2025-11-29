@@ -189,5 +189,5 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-// 로그인
+// 로그인ㅎㅎ
 client.login(process.env.DISCORD_TOKEN);
