@@ -86,12 +86,6 @@ client.on("messageCreate", async (message) => {
 
   // 수동 알림 테스트 (불참자 채널에서만)
   if (message.content === "!불참알림") {
-    if (message.channel.id !== absentChannelId) {
-      return message.channel.send(
-        "❌ 이 명령어는 등록된 불참자 채널에서만 사용할 수 있어요!",
-      );
-    }
-
     try {
       const { channelId } = require("./absentChannel.js");
       const targetChannel = client.channels.cache.get(channelId);

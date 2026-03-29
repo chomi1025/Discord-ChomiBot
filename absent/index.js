@@ -31,51 +31,51 @@ const SHEET_TABS = {
 const VALID_GROUPS = ["1군단", "2군단"];
 
 // 시트 이름으로 시트 ID 얻기
-async function getSheetIdByTitle(spreadsheetId, sheetTitle) {
-  const res = await sheets.spreadsheets.get({ spreadsheetId });
-  const sheet = res.data.sheets.find((s) => s.properties.title === sheetTitle);
-  if (!sheet) throw new Error("Sheet not found: " + sheetTitle);
-  return sheet.properties.sheetId;
-}
+// async function getSheetIdByTitle(spreadsheetId, sheetTitle) {
+//   const res = await sheets.spreadsheets.get({ spreadsheetId });
+//   const sheet = res.data.sheets.find((s) => s.properties.title === sheetTitle);
+//   if (!sheet) throw new Error("Sheet not found: " + sheetTitle);
+//   return sheet.properties.sheetId;
+// }
 
 // 행 그룹 해제 (자동 접힘 방지용)
-async function ungroupAllRows(spreadsheetId, sheetTab) {
-  const sheetId = await getSheetIdByTitle(spreadsheetId, sheetTab);
-  const requests = [
-    {
-      ungroupRows: {
-        range: {
-          sheetId,
-          dimension: "ROWS",
-          startIndex: 0,
-          endIndex: 1000, // 충분히 넉넉하게 잡음
-        },
-      },
-    },
-  ];
+// async function ungroupAllRows(spreadsheetId, sheetTab) {
+//   const sheetId = await getSheetIdByTitle(spreadsheetId, sheetTab);
+//   const requests = [
+//     {
+//       ungroupRows: {
+//         range: {
+//           sheetId,
+//           dimension: "ROWS",
+//           startIndex: 0,
+//           endIndex: 1000, // 충분히 넉넉하게 잡음
+//         },
+//       },
+//     },
+//   ];
 
-  await sheets.spreadsheets.batchUpdate({
-    spreadsheetId: SPREADSHEET_ID,
-    requestBody: {
-      requests: [
-        {
-          updateDimensionProperties: {
-            range: {
-              sheetId,
-              dimension: "ROWS",
-              startIndex: 2,
-              endIndex: 3,
-            },
-            properties: {
-              hiddenByUser: false,
-            },
-            fields: "hiddenByUser",
-          },
-        },
-      ],
-    },
-  });
-}
+//   await sheets.spreadsheets.batchUpdate({
+//     spreadsheetId: SPREADSHEET_ID,
+//     requestBody: {
+//       requests: [
+//         {
+//           updateDimensionProperties: {
+//             range: {
+//               sheetId,
+//               dimension: "ROWS",
+//               startIndex: 2,
+//               endIndex: 3,
+//             },
+//             properties: {
+//               hiddenByUser: false,
+//             },
+//             fields: "hiddenByUser",
+//           },
+//         },
+//       ],
+//     },
+//   });
+// }
 
 // 가로로 한 줄씩, 아래로 추가되는 함수
 async function appendRowVertically(spreadsheetId, sheetTab, values) {
@@ -126,7 +126,7 @@ async function getLatestAbsents(spreadsheetId, sheetTab) {
   const latestDate = dates.sort().reverse()[0];
 
   // 최신 날짜와 같은 행만 필터링
-  return rows.filter((r, idx) => {
+  return rows.filter((r) => {
     const val = r[0];
     const dateStr = typeof val === "number" ? serialNumberToDate(val) : val;
     return dateStr === latestDate;
