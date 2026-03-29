@@ -20,6 +20,9 @@ jobs:
 
       - name: Run check
         run: node bot.js
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
 
   deploy:
     needs: build-test
