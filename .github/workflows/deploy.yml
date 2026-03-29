@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main # ⚠️ 네 브랜치 이름 맞게 수정 (master면 master)
+      - main
 
 jobs:
   deploy:
