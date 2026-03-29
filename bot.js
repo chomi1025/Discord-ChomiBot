@@ -6,11 +6,7 @@ const { fetchCatImage } = require("./fetchImage/cat.js");
 const fs = require("fs");
 const { Client, GatewayIntentBits } = require("discord.js");
 const { handleAbsentCommand, handleListCommand } = require("./absent");
-<<<<<<< HEAD
 const eventScheduler = require("./eventScheduler");
-=======
-const eventScheduler = require("./eventScheduler"); // 이벤트 스케줄러 모듈 불러오기
->>>>>>> 02a4ddd0f199450fc8aca487c8a0382e3e62ef68
 
 // 전역 변수
 let alarmChannelId = null;
@@ -172,8 +168,6 @@ client.on("messageCreate", async (message) => {
     } catch (error) {
       console.error("🐛 강아지 API 오류:", error);
       message.channel.send("❌ 오류가 발생했어요!");
-<<<<<<< HEAD
-=======
     }
   }
 
@@ -191,7 +185,6 @@ client.on("messageCreate", async (message) => {
       });
     } else {
       message.channel.send("❌ 오류가 발생했어요!");
->>>>>>> 02a4ddd0f199450fc8aca487c8a0382e3e62ef68
     }
   }
 });
