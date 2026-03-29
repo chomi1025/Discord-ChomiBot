@@ -44,8 +44,8 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
-    }
+      timezone: "UTC",
+    },
   );
 
   // 12:00 알림 (홀수번째)
@@ -59,8 +59,8 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
-    }
+      timezone: "UTC",
+    },
   );
 }
 

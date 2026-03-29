@@ -10,18 +10,17 @@ const baseDates = [
 const eventIntervalDays = 14; // 2주 간격 반복
 
 function isEventDay(today) {
-  // today는 UTC 기준 Date 객체라고 가정
   const todayMidnightUTC = Date.UTC(
     today.getUTCFullYear(),
     today.getUTCMonth(),
-    today.getUTCDate()
+    today.getUTCDate(),
   );
 
   return baseDates.some((baseDate) => {
     const baseMidnightUTC = Date.UTC(
       baseDate.getUTCFullYear(),
       baseDate.getUTCMonth(),
-      baseDate.getUTCDate()
+      baseDate.getUTCDate(),
     );
 
     const diffTime = todayMidnightUTC - baseMidnightUTC;
@@ -58,8 +57,8 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
-    }
+      timezone: "UTC",
+    },
   );
 }
 

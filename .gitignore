@@ -15,5 +15,5 @@ channel.js
 .github/workflows/
 
 # Google Sheets 관련 (원하면 제외 가능)
-absent/
+absent/config/service-account.json
 pelagic-cocoa-460602-p1-d856db194434.json

@@ -40,8 +40,8 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
-    }
+      timezone: "UTC",
+    },
   );
 
   // 2군단(9시)
@@ -68,8 +68,8 @@ function start(client, channelId) {
       }
     },
     {
-      timezone: "UTC", // 🔥 핵심!!!!
-    }
+      timezone: "UTC",
+    },
   );
 }
 
