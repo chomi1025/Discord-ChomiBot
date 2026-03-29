@@ -21,7 +21,7 @@ jobs:
       - name: Run check
         run: node bot.js
         env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          NODE_ENV: test
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
 
   deploy:

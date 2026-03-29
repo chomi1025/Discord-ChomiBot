@@ -184,4 +184,6 @@ client.on("messageCreate", async (message) => {
 });
 
 // 로그인ㅎㅎ
-client.login(process.env.DISCORD_TOKEN);
+if (process.env.NODE_ENV !== "test") {
+  client.login(process.env.DISCORD_TOKEN);
+}
