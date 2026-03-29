@@ -22,4 +22,4 @@ jobs:
             cd /home/chome49100/Discord-ChomiBot
             git pull origin main
             yarn install
-            pm2 restart bot.js
+            pm2 restart bot
