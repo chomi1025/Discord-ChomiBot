@@ -6,7 +6,23 @@ on:
       - main
 
 jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install
+        run: yarn install
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Run check
+        run: node bot.js
+
   deploy:
+    needs: build-test
     runs-on: ubuntu-latest
 
     steps:
@@ -22,4 +38,4 @@ jobs:
             cd /home/chome49100/Discord-ChomiBot
             git pull origin main
             yarn install
-            pm2 restart bot
+            pm2 reload bot
