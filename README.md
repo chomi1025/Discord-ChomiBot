@@ -4,66 +4,59 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=flat-square&logo=node.js&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/Discord.js-14.19.3-blue?style=flat-square&logo=discord&logoColor=white)
 ![Google APIs](https://img.shields.io/badge/googleapis-149.0.0-green?style=flat-square&logo=google&logoColor=white)
-![Node Cron](https://img.shields.io/badge/node--cron-4.0.6-orange?style=flat-square&logo=nodemon&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-1.9.0-lightgrey?style=flat-square&logo=axios&logoColor=white)
+![Node Cron](https://img.shields.io/badge/node--cron-4.0.6-orange?style=flat-square&logo=nodemon&logoColor=white)
 ![Google Cloud](https://img.shields.io/badge/Google%20Cloud%20Platform-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
 ![PM2](https://img.shields.io/badge/PM2-blue?style=flat-square&logo=pm2&logoColor=white)
-![Node Fetch](https://img.shields.io/badge/node--fetch-2.7.0-purple?style=flat-square&logo=nodemon&logoColor=white)
-![Node Schedule](https://img.shields.io/badge/node--schedule-2.1.1-yellowgreen?style=flat-square&logo=nodemon&logoColor=white)
+
+　
+---
+# 🚀 Discord-ChomiBot 소개 & 핵심 기능
+> 저는 실제로 모바일 게임을 하면서, 미국, 대만, 중국, 러시아 등 여러 나라 친구들과 길드 활동을 하고 있었습니다.  
+> 그런데 서로 다른 시간대 때문에 이벤트를 놓치거나, 참여율이 떨어지는 일이 자주 발생했습니다.  
+>  
+> “디스코드에서 자동으로 알림을 주면 해결되지 않을까?” 라는 생각에서 이 프로젝트를 시작하게 되었고,  
+> 단순한 알림 기능에서 시작해 불참자 관리, 랜덤 이미지 기능까지 확장하게 되었습니다.  
+>  
+> 실제 길드원들이 사용하면서 불편함이 줄어드는 걸 직접 확인할 수 있었고,  
+> 단순 토이 프로젝트가 아닌 **실사용 서비스 형태로 발전시킬 수 있었습니다.**
 
 ---
-
-> 🌍 글로벌 길드 유저들의 이벤트 참여율을 높이기 위해
-> 디스코드에서 자동 알림 및 참여 관리 기능을 제공하는 봇
-
----
-
-## 🚀 Key Features (핵심 기능)
-
-이 프로젝트의 핵심은 **글로벌 유저들 간의 시차 문제를 극복**하고, **데이터 관리의 편의성**을 극대화하는 것에 있습니다.
+　
 
 - **🌐 다국적 시차 대응 자동 알림 (`Node-cron`)**
   - UTC와 현지 시간 차이로 인해 놓치기 쉬운 게임 이벤트를 `node-cron` 스케줄러를 통해 자동화했습니다.
-  - 고정된 주기로 반복되는 이벤트 특성에 맞춰 정밀한 타이머 알림 기능을 제공하여 길드 참여율을 **약 30% 이상 개선**했습니다.
+  - 고정된 주기로 반복되는 이벤트 특성에 맞춰 타이머 기반 알림 기능을 구현했습니다.
+  - 실제 길드에서 사용하면서, 이벤트 참여를 놓치는 경우가 눈에 띄게 줄어드는 효과를 확인할 수 있었습니다.
 
 - **📊 실시간 데이터 동기화 (`Google Sheets API`)**
-  - 별도의 DB 서버 구축 없이 `Google Sheets`를 데이터베이스로 활용하여 운영 비용을 절감했습니다.
-  - `googleapis`를 연동해 디스코드 내 명령어만으로 구글 시트에 실시간 불참자 등록 및 조회가 가능하도록 구현했습니다.
+  - 별도의 DB를 따로 구축하지 않고, Google Sheets를 데이터 저장소처럼 활용했습니다.
+  - `googleapis`를 연동해 디스코드 명령어만으로 불참자를 바로 기록하고, 조회할 수 있도록 구현했습니다.
+  - 따로 관리 페이지를 만들지 않아도 돼서, 길드원들과 간단하게 데이터를 공유하기 좋았습니다.
 
 - **🛡️ 안정적인 서비스 운영 (`PM2` & `GCP`)**
-  - `Google Cloud Platform(GCP)` VM 인스턴스 환경에서 24시간 중단 없는 서비스를 제공합니다.
-  - `PM2` 프로세스 관리자를 도입해 예기치 못한 에러 발생 시에도 봇이 자동으로 재시작되도록 안정성을 확보했습니다.
+  - GCP VM 인스턴스에서 봇을 실행해 항상 켜져 있도록 구성했습니다.
+  - `PM2`를 사용해 에러로 프로세스가 종료되더라도 자동으로 다시 실행되도록 설정했습니다.
 
-- **🧪 철저한 환경 분리 (Test & Prod)**
-  - 실제 운영 중인 길드 채널에 영향을 주지 않도록 별도의 테스트 서버와 실험용 봇을 운용하여 안정적인 기능 업데이트가 가능합니다.
+- **🧪 테스트 환경 분리**
+  - 실제 사용하는 디스코드 채널과 별도로 테스트 전용 서버를 만들어 기능을 먼저 검증할 수 있도록 했습니다.
+  - 덕분에 운영 중인 채널에 영향을 주지 않고 안전하게 기능을 추가할 수 있었습니다.
 
 - **🎮 기타 기능 (Fun Features)**
-  - `Axios`를 활용한 외부 API 연동으로 랜덤 이미지 제공 기능 구현
-  - 디스코드 명령어 처리 및 응답 흐름 설계 경험
+  - `Axios`를 활용해 외부 API와 연동하고, 랜덤 동물 이미지를 가져오는 기능을 추가했습니다.
+  - 디스코드 명령어 처리 흐름을 직접 설계하면서, 사용자 입력 → 처리 → 응답 구조를 경험했습니다.
 
+- **🚀 CI/CD 자동 배포 (GitHub Actions)**
+  - GitHub Actions를 활용해 main 브랜치에 push 시 자동으로 서버에 배포되도록 구성했습니다.
+  - 배포 과정에서 간단한 검증 단계를 거친 뒤, PM2를 통해 자동으로 재시작되도록 설정했습니다.
 ---
-
-### 📖 Project Background (제작 배경)
-
-이 디스코드 봇은, 제가 실제로 플레이하고 있는 **모바일 MMORPG 게임**의 길드 친구들을 위해 제작한 프로젝트입니다.
-
-미국, 대만, 중국, 러시아 등 다양한 지역에 거주하는 외국인 친구들과 함께 플레이하다 보니
-서로 다른 시간대로 인해 이벤트 시간에 혼선이 생기는 경우가 많았고,
-그로 인해 참여율이 점점 낮아지는 문제가 발생했습니다.
-
-그래서 "디스코드에서 봇이 자동으로 알림을 보내주면 어떨까?" 하는 생각이 들었고,
-길드 유저들의 **이벤트 참여율을 높이고 소통을 돕기 위해** 이 봇을 만들게 되었습니다.
-
-처음에는 단순히 이벤트 알림 기능만 구현했지만, 만들다 보니 욕심이 생겨
-불참자 등록 및 조회 기능, 랜덤 동물 사진 출력 같은 소소한 기능들도 함께 추가했습니다.😊
-
-　
-
 　
 
 ## 🖼️ 데모 & 스크린샷
 
 ### 🔔 1. 이벤트 알림
+
+> ⏰ 반복되는 게임 이벤트 시간을 자동으로 알려주는 기능
 
 ![image](https://github.com/user-attachments/assets/55e2e4d0-7e47-4afc-b736-9c177c871aca)
 
@@ -75,8 +68,8 @@
 　
 
 ### ❌ 2. 불참자 등록/조회
-
-#### 2-1 불참자 등록
+> 📝 디스코드에서 입력하면 구글시트에 자동으로 기록되고 조회까지 가능한 기능
+#### 2-1 불참자 등록(Post)
 
 <table align="center" style="margin: auto; width: 100%;">
   <tr>
@@ -108,7 +101,7 @@
   </tr>
 </table>
 
-#### 2-1 불참자 조회
+#### 2-2 불참자 조회(Get)
 
 <table align="center" style="margin: auto; width: 100%;">
   <tr>
@@ -141,12 +134,12 @@
   </tr>
 </table>
 
-[자세한 설명 보기](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EB%B6%88%EC%B0%B8%EC%9E%90-%EB%93%B1%EB%A1%9D-%EC%A1%B0%ED%9A%8C)
+👉 [기능 상세 보기 (Wiki)](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EB%B6%88%EC%B0%B8%EC%9E%90-%EB%93%B1%EB%A1%9D-%EC%A1%B0%ED%9A%8C)
 
 　
 
 ### 🐶 3. 동물사진 출력기능
-
+> 🐾 외부 API를 활용해 랜덤 이미지를 가져와 공유하는 기능
 <table align="center" style="margin: auto; width: 100%;">
   <tr>
       <td align="center" style="padding: 10px; vertical-align: top;">
@@ -168,18 +161,17 @@
 
 ## 🛠️ 기술 스택 (Tech Stack)
 
-이 프로젝트는 다음 기술들을 활용하여 개발되었습니다.
+
 | 분류 | 기술 스택 |
 |------|-----------|
-| **언어** | JavaScript (Node.js) |
-| **라이브러리** | Discord.js, Google Sheets API, Node-cron, Axios |
-| **데이터베이스** | Google Sheets |
-| **클라우드 & 배포** | Google Cloud Platform (GCP) • PM2 |
-| **개발 도구** | Git, GitHub, VSCode |
+| **Backend** | Node.js (JavaScript) |
+| **Libraries** | Discord.js, Google Sheets API, Node-cron, Axios |
+| **Database** | Google Sheets |
+| **Infra / Deployment** | GCP, PM2, GitHub Actions |
 
 　
 
-## 🧪 테스트 환경
+## 🧪 테스트 환경 분리 (Test & Production)
 
 안정적인 개발과 테스트를 위해 아래와 같은 구조로 테스트 환경을 분리해 두었습니다.
 
@@ -197,7 +189,8 @@
 
 ![image](https://github.com/user-attachments/assets/9abdb175-3cfe-4d43-868d-4f0cdb0ef0d2)
 
-> 🧠 처음에는 UTC 시간 개념이 익숙지 않아 테스트가 많이 필요했지만, 이러한 구조 덕분에 실제 채널에 피해 없이 새로운 기능을 마음껏 실험할 수 있었습니다!
+> 🧠 시차(UTC) 기반 스케줄링 특성상 충분한 검증이 필요했지만,
+> 테스트 환경을 분리해 실제 운영 채널에 영향을 주지 않고 안정적으로 기능을 개선할 수 있었습니다.
 
 　
 
@@ -289,9 +282,13 @@ const KEY_FILE_PATH = path.join(
 　
 
 ## ✨ 회고 및 앞으로의 계획
+이번 프로젝트를 통해 단순히 기능을 구현하는 것을 넘어, 실제 사용자 환경에서 동작하는 서비스를 설계하고 운영하는 경험을 할 수 있었습니다.
 
-이번 프로젝트를 진행하면서 구글 시트를 데이터베이스로 활용하고, 디스코드 봇과 연동하며, 구글 클라우드를 이용해 배포하는 경험을 쌓을 수 있었습니다.
-특히 함께 게임하는 친구들이 사용할 봇이라는 생각 덕분에 기획 단계에서 어려움 없이 빠르게 작업할 수 있었고, 실사용 목적의 프로젝트라 피드백도 활발하게 받아가며 즐겁게 진행했습니다.
-처음에는 어렵게 느껴졌지만, 하나씩 차근차근 구현해 나가면서 많은 경험과 자신감을 얻을 수 있었습니다.
-결과적으로, 이 프로젝트를 통해 실제 사용자 문제를 해결하는 경험과 함께,
-운영 환경에서 안정적으로 동작하는 서비스를 설계하고 개선하는 역량을 기를 수 있었습니다.
+초기에는 이벤트 알림 기능을 구현하는 것이 목표였지만, 운영 과정에서 불참자 관리의 필요성을 느끼며 기능을 확장하게 되었고, 그 과정에서 Google Sheets를 데이터 저장소로 활용하고 디스코드 봇과 연동하는 구조를 직접 설계해볼 수 있었습니다.
+
+또한 시차(UTC) 기반의 스케줄링과 같은 예상치 못한 문제를 겪으면서, 테스트 환경을 분리하고 충분한 검증 과정을 거치는 것이 얼마나 중요한지 체감할 수 있었습니다.
+
+이 프로젝트를 통해 단순 개발을 넘어, 실제 사용자의 흐름을 고려한 기능 확장과 안정적인 운영 환경의 중요성을 배우게 되었고, 앞으로는 이러한 경험을 바탕으로 더 구조적인 설계와 확장성을 고려한 프로젝트를 진행해보고자 합니다.
+
+
+
