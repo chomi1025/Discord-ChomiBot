@@ -63,7 +63,8 @@
 - 게임 이벤트는 N주, N회, N시와 같이 **고정된 주기로 반복되는 특징**을 가지고 있습니다.
 - 이러한 반복적인 이벤트를 놓치지 않도록 **Node-cron 기능을 활용**하여 **자동 타이머 알림 기능**을 개발했습니다.
 
-[자세한 설명 보기](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%95%8C%EB%A6%BC)
+👉 [기능 상세 보기 (Wiki)](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%95%8C%EB%A6%BC)
+
 
 　
 
@@ -155,7 +156,7 @@
   </tr>
 </table>
 
-[!자세한 설명 보기](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%82%AC%EC%A7%84-%EC%B6%9C%EB%A0%A5)
+👉 [기능 상세 보기 (Wiki)](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%82%AC%EC%A7%84-%EC%B6%9C%EB%A0%A5)
 
 　
 
