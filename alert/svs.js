@@ -7,7 +7,6 @@ const eventIntervalDays = 28; // 28고정
 
 function isEventDay(today) {
   const diffTime = today.getTime() - eventStartDate.getTime();
-  if (diffTime < 0) return false; // 이벤트 시작 전
 
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
   return diffDays % eventIntervalDays === 0;

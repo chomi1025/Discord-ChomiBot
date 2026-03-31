@@ -84,25 +84,6 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  // 수동 알림 테스트 (불참자 채널에서만)
-  if (message.content === "!불참알림") {
-    try {
-      const { channelId } = require("./absentChannel.js");
-      const targetChannel = client.channels.cache.get(channelId);
-
-      if (targetChannel) {
-        eventScheduler.start(client, channelId);
-        targetChannel.send("📢 테스트 알림입니다!");
-      } else {
-        message.channel.send("❌ 채널을 찾을 수 없어요!");
-      }
-    } catch {
-      message.channel.send(
-        "⚠️ 불참자 채널이 등록되어 있지 않아요. !불참등록 먼저 해주세요!",
-      );
-    }
-  }
-
   // 불참자 등록
   if (message.content.startsWith("!결석")) {
     const args = message.content.split(" ").slice(1);
@@ -110,7 +91,7 @@ client.on("messageCreate", async (message) => {
     message.channel.send(reply);
   }
 
-  // 리스트 조회
+  // 불참자 리스트 조회
   if (
     message.content.toLowerCase().startsWith("!리스트") ||
     message.content.toLowerCase().startsWith("!list") ||

@@ -23,9 +23,10 @@ function isEventDay(today) {
     );
 
     const diffTime = todayMidnightUTC - baseMidnightUTC;
+
     if (diffTime < 0) return false;
 
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); //일로변환
     return diffDays % eventIntervalDays === 0;
   });
 }

@@ -102,7 +102,7 @@ function serialNumberToDate(serial) {
   return `${year}-${month}-${day}`;
 }
 
-// 최신 불참자 목록 가져오기
+// 최신 불참자 목록 가져오기(GET)
 async function getLatestAbsents(spreadsheetId, sheetTab) {
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId,

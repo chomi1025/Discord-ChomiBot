@@ -22,6 +22,7 @@ function start(client, channelId) {
     () => {
       const today = new Date(); //오늘 날짜
 
+      //오늘이 이벤트 날이면
       if (isEventDay(today)) {
         const channel = client.channels.cache.get(channelId);
 
