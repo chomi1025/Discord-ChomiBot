@@ -59,7 +59,6 @@ function start(client, channelId) {
           timestamp: new Date(),
         };
 
-        // 보내는 코드 예시
         channel.send({ embeds: [embed] });
       }
     },

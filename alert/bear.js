@@ -25,7 +25,6 @@ function getBearTime(today) {
     return null;
   }
 
-  // 협곡 사이클 내 경과일 계산 (totalDays는 현재 짝수임: 2, 4, 6, ... 26)
   const daysSinceCanyon = totalDays % 28;
 
   //협곡 있는주
@@ -65,7 +64,6 @@ function start(client, channelId) {
         timestamp: new Date(),
       };
 
-      // 현재 시간이 계산된 시간과 일치하는지 확인
       if (
         now.getUTCHours() === time.hour &&
         now.getUTCMinutes() === time.minute

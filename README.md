@@ -9,29 +9,27 @@
 ![Google Cloud](https://img.shields.io/badge/Google%20Cloud%20Platform-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
 ![PM2](https://img.shields.io/badge/PM2-blue?style=flat-square&logo=pm2&logoColor=white)
 
-　
----
+## 　
+
 # 🚀 Discord-ChomiBot 소개 & 핵심 기능
-> 저는 실제로 모바일 게임을 하면서, 미국, 대만, 중국, 러시아 등 여러 나라 친구들과 길드 활동을 하고 있었습니다.  
-> 그런데 서로 다른 시간대 때문에 이벤트를 놓치거나, 참여율이 떨어지는 일이 자주 발생했습니다.  
->  
-> “디스코드에서 자동으로 알림을 주면 해결되지 않을까?” 라는 생각에서 이 프로젝트를 시작하게 되었고,  
-> 단순한 알림 기능에서 시작해 불참자 관리, 랜덤 이미지 기능까지 확장하게 되었습니다.  
->  
-> 실제 길드원들이 사용하면서 불편함이 줄어드는 걸 직접 확인할 수 있었고,  
+
+> 저는 실제로 모바일 게임을 하면서, 미국, 대만, 중국, 러시아 등 여러 나라 친구들과 길드 활동을 하고 있었습니다.
+> 그런데 서로 다른 시간대 때문에 이벤트를 놓치거나, 참여율이 떨어지는 일이 자주 발생했습니다.
+>
+> “디스코드에서 자동으로 알림을 주면 해결되지 않을까?” 라는 생각에서 이 프로젝트를 시작하게 되었고,
+> 단순한 알림 기능에서 시작해 불참자 관리, 랜덤 이미지 기능까지 확장하게 되었습니다.
+>
+> 실제 길드원들이 사용하면서 불편함이 줄어드는 걸 직접 확인할 수 있었고,
 > 단순 토이 프로젝트가 아닌 **실사용 서비스 형태로 발전시킬 수 있었습니다.**
 
 ---
+
 　
 
 - **🌐 다국적 시차 대응 자동 알림 (`Node-cron`)**
   - UTC와 현지 시간 차이로 인해 놓치기 쉬운 게임 이벤트를 `node-cron` 스케줄러를 통해 자동화했습니다.
-<<<<<<< HEAD
-  - 이벤트 시간을 헷갈려 하던 길드원들이 줄어들었고, 실제로 이전보다 이벤트 참여 인원이 눈에 띄게 늘어났습니다.
-=======
   - 고정된 주기로 반복되는 이벤트 특성에 맞춰 타이머 기반 알림 기능을 구현했습니다.
   - 실제 길드에서 사용하면서, 이벤트 참여를 놓치는 경우가 눈에 띄게 줄어드는 효과를 확인할 수 있었습니다.
->>>>>>> 4c5d8f345f4fd19ff9f745518faed872f1c1e83e
 
 - **📊 실시간 데이터 동기화 (`Google Sheets API`)**
   - 별도의 DB를 따로 구축하지 않고, Google Sheets를 데이터 저장소처럼 활용했습니다.
@@ -53,7 +51,9 @@
 - **🚀 CI/CD 자동 배포 (GitHub Actions)**
   - GitHub Actions를 활용해 main 브랜치에 push 시 자동으로 서버에 배포되도록 구성했습니다.
   - 배포 과정에서 간단한 검증 단계를 거친 뒤, PM2를 통해 자동으로 재시작되도록 설정했습니다.
+
 ---
+
 　
 
 ## 🖼️ 데모 & 스크린샷
@@ -69,11 +69,12 @@
 
 👉 [기능 상세 보기 (Wiki)](https://github.com/chomi1025/Discord-ChomiBot/wiki/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%95%8C%EB%A6%BC)
 
-
 　
 
 ### ❌ 2. 불참자 등록/조회
+
 > 📝 디스코드에서 입력하면 구글시트에 자동으로 기록되고 조회까지 가능한 기능
+
 #### 2-1 불참자 등록(Post)
 
 <table align="center" style="margin: auto; width: 100%;">
@@ -144,7 +145,9 @@
 　
 
 ### 🐶 3. 동물사진 출력기능
+
 > 🐾 외부 API를 활용해 랜덤 이미지를 가져와 공유하는 기능
+
 <table align="center" style="margin: auto; width: 100%;">
   <tr>
       <td align="center" style="padding: 10px; vertical-align: top;">
@@ -166,13 +169,12 @@
 
 ## 🛠️ 기술 스택 (Tech Stack)
 
-
-| 분류 | 기술 스택 |
-|------|-----------|
-| **Backend** | Node.js (JavaScript) |
-| **Libraries** | Discord.js, Google Sheets API, Node-cron, Axios |
-| **Database** | Google Sheets |
-| **Infra / Deployment** | GCP, PM2, GitHub Actions |
+| 분류                   | 기술 스택                                       |
+| ---------------------- | ----------------------------------------------- |
+| **Backend**            | Node.js (JavaScript)                            |
+| **Libraries**          | Discord.js, Google Sheets API, Node-cron, Axios |
+| **Database**           | Google Sheets                                   |
+| **Infra / Deployment** | GCP, PM2, GitHub Actions                        |
 
 　
 
@@ -287,6 +289,7 @@ const KEY_FILE_PATH = path.join(
 　
 
 ## ✨ 회고 및 앞으로의 계획
+
 이번 프로젝트를 통해 단순히 기능을 구현하는 것을 넘어, 실제 사용자 환경에서 동작하는 서비스를 설계하고 운영하는 경험을 할 수 있었습니다.
 
 초기에는 이벤트 알림 기능을 구현하는 것이 목표였지만, 운영 과정에서 불참자 관리의 필요성을 느끼며 기능을 확장하게 되었고, 그 과정에서 Google Sheets를 데이터 저장소로 활용하고 디스코드 봇과 연동하는 구조를 직접 설계해볼 수 있었습니다.
@@ -294,6 +297,3 @@ const KEY_FILE_PATH = path.join(
 또한 시차(UTC) 기반의 스케줄링과 같은 예상치 못한 문제를 겪으면서, 테스트 환경을 분리하고 충분한 검증 과정을 거치는 것이 얼마나 중요한지 체감할 수 있었습니다.
 
 이 프로젝트를 통해 단순 개발을 넘어, 실제 사용자의 흐름을 고려한 기능 확장과 안정적인 운영 환경의 중요성을 배우게 되었고, 앞으로는 이러한 경험을 바탕으로 더 구조적인 설계와 확장성을 고려한 프로젝트를 진행해보고자 합니다.
-
-
-

@@ -2,19 +2,15 @@ require("dotenv").config();
 const { google } = require("googleapis");
 const path = require("path");
 
-// 구글 시트 API 초기화 코드 작성 (OAuth2 or 서비스 계정 인증 등)
-// 예시로 서비스 계정 키 JSON 파일을 쓰는 방법
-
 const KEY_FILE_PATH = path.join(__dirname, "config", "service-account.json");
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: KEY_FILE_PATH, // 본인 키파일 경로
+  keyFile: KEY_FILE_PATH,
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
 const sheets = google.sheets({ version: "v4", auth });
 
-// 구글 스프레드시트 아이디
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 if (!SPREADSHEET_ID) {
@@ -81,9 +77,9 @@ const VALID_GROUPS = ["1군단", "2군단"];
 async function appendRowVertically(spreadsheetId, sheetTab, values) {
   await sheets.spreadsheets.values.append({
     spreadsheetId,
-    range: `${sheetTab}!B4:D`, // B~D열만 사용할 거라고 명시
+    range: `${sheetTab}!B4:D`, // B~D열
     valueInputOption: "USER_ENTERED",
-    insertDataOption: "INSERT_ROWS", // 아래로 추가되게 설정
+    insertDataOption: "INSERT_ROWS", // 아래로 추가되게
     resource: {
       values: [values], // 가로 한 줄 추가
     },
@@ -113,7 +109,6 @@ async function getLatestAbsents(spreadsheetId, sheetTab) {
 
   if (rows.length === 0) return [];
 
-  // 날짜 컬럼이 B열(인덱스 0)이니까
   const dates = rows.map((r) => {
     const val = r[0];
     if (typeof val === "number") {
@@ -122,10 +117,7 @@ async function getLatestAbsents(spreadsheetId, sheetTab) {
     return val;
   });
 
-  // 최신 날짜 찾기 (내림차순 정렬 후 첫 번째)
   const latestDate = dates.sort().reverse()[0];
-
-  // 최신 날짜와 같은 행만 필터링
   return rows.filter((r) => {
     const val = r[0];
     const dateStr = typeof val === "number" ? serialNumberToDate(val) : val;
@@ -160,7 +152,6 @@ async function handleAbsentCommand(args) {
   } catch (error) {
     console.error("ungroupAllRows 에러:", error);
     return "서버 오류가 발생했습니다.";
-    // 에러났어도 서버가 멈추지 않도록 처리
   }
 }
 
@@ -170,7 +161,6 @@ async function handleListCommand(args, isKoreanMode = true) {
 
   eventKor = eventKor.trim().toLowerCase();
 
-  // 키워드 매핑: 한글, 영어 모두 지원
   const keywordMap = {
     canyon: "canyon",
     협곡: "canyon",
@@ -190,7 +180,6 @@ async function handleListCommand(args, isKoreanMode = true) {
   const dates = absents.map((r) => r[0]);
   const latestDate = dates.sort().reverse()[0];
 
-  // 한글/영어 이벤트 이름 매핑
   const displayNames = {
     canyon: {
       ko: "협곡",
@@ -202,25 +191,20 @@ async function handleListCommand(args, isKoreanMode = true) {
     },
   };
 
-  // 한글/영어 불참자 레이블
   const labels = {
     ko: "불참자",
     en: "absentee",
   };
 
-  // 표시할 언어 선택
   const lang = isKoreanMode ? "ko" : "en";
 
-  // 제목 만들기
   const title = `👿 ${displayNames[realEventKey][lang]} ${labels[lang]} (${latestDate})`;
 
-  // 설명 (불참자 목록)
   const description = absents
     .filter((r) => r[0] === latestDate)
     .map((r) => r[2])
     .join("\n");
 
-  // 임베드 객체 반환
   const embed = {
     title,
     description,
