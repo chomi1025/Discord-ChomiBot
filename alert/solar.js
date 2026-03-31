@@ -23,24 +23,28 @@ function start(client, channelId) {
 
       if (isEventDay(today)) {
         const channel = client.channels.cache.get(channelId);
-        if (channel) {
-          const embed = {
-            color: 0xf38201,
-            title: "🏃‍♂️ 자리이동(move)",
-            description:
-              "캐슬전투를 위해 솔라시티로 자리를 이동해주세요!😉\n" +
-              "Please move to Sunfire for the castle battle!😉",
-            timestamp: new Date(),
-          };
 
-          // 보내는 코드 예시
-          channel.send({ embeds: [embed] });
+        if (!channel) {
+          console.error(`채널을 찾을 수 없습니다.`);
+          return;
         }
+
+        const embed = {
+          color: 0xf38201,
+          title: "🏃‍♂️ 자리이동(move)",
+          description:
+            "캐슬전투를 위해 솔라시티로 자리를 이동해주세요!😉\n" +
+            "Please move to Sunfire for the castle battle!😉",
+          timestamp: new Date(),
+        };
+
+        // 보내는 코드 예시
+        channel.send({ embeds: [embed] });
       }
     },
     {
       timezone: "UTC",
-    }
+    },
   );
 
   // 9시에 전투 알림
@@ -52,23 +56,27 @@ function start(client, channelId) {
 
       if (isEventDay(today)) {
         const channel = client.channels.cache.get(channelId);
-        if (channel) {
-          const embed = {
-            color: 0xf38201,
-            title: "🛕 캐슬전투(Castle Battle)",
-            description:
-              "5분 후 캐슬전투가 시작됩니다!😉\n" +
-              "The castle battle begins in 5 minutes!😉",
-            timestamp: new Date(),
-          };
 
-          channel.send({ embeds: [embed] });
+        if (!channel) {
+          console.error(`채널을 찾을 수 없습니다.`);
+          return;
         }
+
+        const embed = {
+          color: 0xf38201,
+          title: "🛕 캐슬전투(Castle Battle)",
+          description:
+            "5분 후 캐슬전투가 시작됩니다!😉\n" +
+            "The castle battle begins in 5 minutes!😉",
+          timestamp: new Date(),
+        };
+
+        channel.send({ embeds: [embed] });
       }
     },
     {
       timezone: "UTC",
-    }
+    },
   );
 }
 

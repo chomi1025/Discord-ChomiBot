@@ -19,17 +19,21 @@ function getEventIndex(today) {
 
 function sendAlert(client, channelId) {
   const channel = client.channels.cache.get(channelId);
-  if (channel) {
-    const embed = {
-      color: 0x81d742,
-      title: "🔧 용병명예(mercenary)",
-      description:
-        "잠시후 용병명예가 시작됩니다! 보상 먹으러 갑시다!😉\n" +
-        "Mercenary starts will start soon! Let's go claim your rewards!😉",
-      timestamp: new Date(),
-    };
-    channel.send({ embeds: [embed] });
+
+  if (!channel) {
+    console.error(`채널을 찾을 수 없습니다.`);
+    return;
   }
+
+  const embed = {
+    color: 0x81d742,
+    title: "🔧 용병명예(mercenary)",
+    description:
+      "잠시후 용병명예가 시작됩니다! 보상 먹으러 갑시다!😉\n" +
+      "Mercenary starts will start soon! Let's go claim your rewards!😉",
+    timestamp: new Date(),
+  };
+  channel.send({ embeds: [embed] });
 }
 
 function start(client, channelId) {

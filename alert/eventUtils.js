@@ -1,4 +1,3 @@
-// eventUtils.js
 // 협곡 + 곰
 
 const canyonStartDate = new Date("2025-05-17T00:00:00Z");
