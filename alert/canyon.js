@@ -1,69 +1,60 @@
 const cron = require("node-cron");
-const { isCanyonEventDay } = require("./eventUtils");
+const { Temporal } = require("@js-temporal/polyfill");
 
 function start(client, channelId) {
-  // 1군단(11시)
-  //55 13 고정
+  if (!channelId) return;
+
+  const startDate = Temporal.PlainDate.from("2026-04-18");
+
   cron.schedule(
-    "55 13 * * *",
+    "* * * * *",
     () => {
-      const today = new Date();
+      const nowKST = Temporal.Now.zonedDateTimeISO("Asia/Seoul");
+      const today = nowKST.toPlainDate();
 
-      if (isCanyonEventDay(today)) {
-        const channel = client.channels.cache.get(channelId);
+      const diff = today.since(startDate, { largestUnit: "day" }).days;
 
-        if (!channel) {
-          console.error(`채널을 찾을 수 없습니다.`);
-          return;
-        }
+      const isEventDay = diff >= 0 && diff % 28 === 0;
 
-        const embed = {
-          color: 0x49d3f2,
-          title: "🔥 협곡전투 1군단(Canyon Legion1)",
-          description:
-            "협곡전투 1군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요😉\n" +
-            "The Legion1 of the Canyon Battle starts in 5 minutes! Please join and get ready for the fight😉",
-          timestamp: new Date(),
-        };
+      if (!isEventDay) return;
 
-        // 보내는 코드 예시
-        channel.send({ embeds: [embed] });
-      }
-    },
-    {
-      timezone: "UTC",
-    },
-  );
+      const channel = client.channels.cache.get(channelId);
+      if (!channel) return;
 
-  // 2군단(9시)
-  // 55 11 고정
-  cron.schedule(
-    "55 11 * * *",
-    () => {
-      const today = new Date();
-
-      if (isCanyonEventDay(today)) {
-        const channel = client.channels.cache.get(channelId);
-
-        if (!channel) {
-          console.error(`채널을 찾을 수 없습니다.`);
-          return;
-        }
-
-        const embed = {
-          color: 0x49d3f2,
+      const alerts = [
+        {
+          hour: 20,
+          minute: 55,
           title: "🔥 협곡전투 2군단(Foundry Legion2)",
           description:
-            "협곡전투 2군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요😉\n" +
-            "The Legion2 of the Canyon Battle starts in 5 minutes! Please join and get ready for the fight😉",
-          timestamp: new Date(),
+            "협곡전투 2군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요😉\nThe Legion2 of the Canyon Battle starts in 5 minutes! Please join and get ready for the fight😉",
+        },
+        {
+          hour: 22,
+          minute: 55,
+          title: "🔥 협곡전투 1군단(Canyon Legion1)",
+          description:
+            "협곡전투 1군단 시작 5분 전 입니다! 들어와서 전투를 준비해주세요😉\nThe Legion1 of the Canyon Battle starts in 5 minutes! Please join and get ready for the fight😉",
+        },
+      ];
+
+      const currentAlert = alerts.find(
+        (a) => a.hour === nowKST.hour && a.minute === nowKST.minute,
+      );
+
+      if (currentAlert) {
+        const embed = {
+          color: 0x49d3f2,
+          title: currentAlert.title,
+          description: currentAlert.description,
+          timestamp: nowKST.toInstant().toString(),
         };
 
         channel.send({ embeds: [embed] });
       }
     },
     {
-      timezone: "UTC",
+      timezone: "Asia/Seoul",
     },
   );
 }

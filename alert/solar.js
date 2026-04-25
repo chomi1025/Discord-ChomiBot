@@ -1,81 +1,66 @@
 const cron = require("node-cron");
+const { Temporal } = require("@js-temporal/polyfill");
 
-// 기준 이벤트 날짜
-const eventStartDate = new Date("2025-05-10T00:00:00Z"); // UTC 기준
-
-const eventIntervalDays = 28; // 28고정
+const eventStartDate = Temporal.PlainDate.from("2025-05-10");
+const eventIntervalDays = 28;
 
 function isEventDay(today) {
-  const diffTime = today.getTime() - eventStartDate.getTime();
-  if (diffTime < 0) return false; // 이벤트 시작 전
+  const duration = today.since(eventStartDate);
+  const diffDays = Math.floor(duration.total({ unit: "days" }));
 
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays % eventIntervalDays === 0;
+  return diffDays >= 0 && diffDays % eventIntervalDays === 0;
 }
 
 function start(client, channelId) {
-  // 8시에 이동알림
-  //55 10 고정
+  if (!channelId) return;
+
   cron.schedule(
-    "00 11 * * *",
+    "* * * * *",
     () => {
-      const today = new Date();
+      const nowKST = Temporal.Now.zonedDateTimeISO("Asia/Seoul");
+      const today = nowKST.toPlainDate();
 
-      if (isEventDay(today)) {
-        const channel = client.channels.cache.get(channelId);
+      if (!isEventDay(today)) return;
 
-        if (!channel) {
-          console.error(`채널을 찾을 수 없습니다.`);
-          return;
-        }
+      const channel = client.channels.cache.get(channelId);
+      if (!channel) return;
 
-        const embed = {
+      const alerts = [
+        {
+          hour: 20,
+          minute: 0,
           color: 0xf38201,
           title: "🏃‍♂️ 자리이동(move)",
           description:
-            "캐슬전투를 위해 솔라시티로 자리를 이동해주세요!😉\n" +
-            "Please move to Sunfire for the castle battle!😉",
-          timestamp: new Date(),
-        };
-
-        // 보내는 코드 예시
-        channel.send({ embeds: [embed] });
-      }
-    },
-    {
-      timezone: "UTC",
-    },
-  );
-
-  // 9시에 전투 알림
-  //55 11 고정
-  cron.schedule(
-    "55 11 * * *",
-    () => {
-      const today = new Date();
-
-      if (isEventDay(today)) {
-        const channel = client.channels.cache.get(channelId);
-
-        if (!channel) {
-          console.error(`채널을 찾을 수 없습니다.`);
-          return;
-        }
-
-        const embed = {
+            "캐슬전투를 위해 솔라시티로 자리를 이동해주세요!😉\nPlease move to Sunfire for the castle battle!😉",
+        },
+        {
+          hour: 20,
+          minute: 55,
           color: 0xf38201,
           title: "🛕 캐슬전투(Castle Battle)",
           description:
-            "5분 후 캐슬전투가 시작됩니다!😉\n" +
-            "The castle battle begins in 5 minutes!😉",
-          timestamp: new Date(),
+            "5분 후 캐슬전투가 시작됩니다!😉\nThe castle battle begins in 5 minutes!😉",
+        },
+      ];
+
+      const currentAlert = alerts.find(
+        (a) => a.hour === nowKST.hour && a.minute === nowKST.minute,
+      );
+
+      if (currentAlert) {
+        const embed = {
+          color: currentAlert.color,
+          title: currentAlert.title,
+          description: currentAlert.description,
+          timestamp: nowKST.toInstant().toString(),
         };
 
         channel.send({ embeds: [embed] });
       }
     },
     {
-      timezone: "UTC",
+      timezone: "Asia/Seoul",
     },
   );
 }

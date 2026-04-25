@@ -1,64 +1,62 @@
 const cron = require("node-cron");
+const { Temporal } = require("@js-temporal/polyfill");
 
-// 날짜를 배열로
 const baseDates = [
-  new Date("2025-05-20T00:00:00Z"),
-  new Date("2025-05-22T00:00:00Z"),
+  Temporal.PlainDate.from("2025-05-20"),
+  Temporal.PlainDate.from("2025-05-22"),
 ];
 
-const eventIntervalDays = 14; // 2주 간격 반복
+const eventIntervalDays = 14;
 
 function isEventDay(today) {
-  const todayMidnightUTC = Date.UTC(
-    today.getUTCFullYear(),
-    today.getUTCMonth(),
-    today.getUTCDate(),
-  );
-
   return baseDates.some((baseDate) => {
-    const baseMidnightUTC = Date.UTC(
-      baseDate.getUTCFullYear(),
-      baseDate.getUTCMonth(),
-      baseDate.getUTCDate(),
-    );
-
-    const diffTime = todayMidnightUTC - baseMidnightUTC;
-
-    if (diffTime < 0) return false;
-
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); //일로변환
-    return diffDays % eventIntervalDays === 0;
+    const duration = today.since(baseDate);
+    const diffDays = Math.floor(duration.total({ unit: "days" }));
+    return diffDays >= 0 && diffDays % eventIntervalDays === 0;
   });
 }
 
 function start(client, channelId) {
+  if (!channelId) return;
+
   cron.schedule(
-    "55 11 * * *",
+    "* * * * *",
     () => {
-      const nowUTC = new Date(); //오늘
+      const nowKST = Temporal.Now.zonedDateTimeISO("Asia/Seoul");
+      const today = nowKST.toPlainDate();
 
-      if (isEventDay(nowUTC)) {
-        const channel = client.channels.cache.get(channelId);
+      if (!isEventDay(today)) return;
 
-        if (!channel) {
-          console.error(`채널을 찾을 수 없습니다.`);
-          return;
-        }
+      const channel = client.channels.cache.get(channelId);
+      if (!channel) return;
 
-        const embed = {
+      const alerts = [
+        {
+          hour: 20,
+          minute: 55,
           color: 0xffffff,
           title: "🐱‍👤 미치광이 조이(Crazy Joe)",
           description: "잠시 후 조이가 시작됩니다! 수비하러 갑시다!😉",
-          timestamp: new Date(),
+        },
+      ];
+
+      const currentAlert = alerts.find(
+        (a) => a.hour === nowKST.hour && a.minute === nowKST.minute,
+      );
+
+      if (currentAlert) {
+        const embed = {
+          color: currentAlert.color,
+          title: currentAlert.title,
+          description: currentAlert.description,
+          timestamp: nowKST.toInstant().toString(),
         };
 
         channel.send({ embeds: [embed] });
-      } else {
-        console.log("오늘은 이벤트 날 아님.");
       }
     },
     {
-      timezone: "UTC",
+      timezone: "Asia/Seoul",
     },
   );
 }
